@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.strawberry.dao.UserMapper">
+    <!--id是对应接口方法的方法名，resultType是sql语句的返回值（泛型）-->
+    <select id="getUserList" resultType="com.strawberry.pojo.User">
+        select * from mybatis.user;
+    </select>
+
+    <select id="getUserById" resultType="com.strawberry.pojo.User" parameterType="int">
+        select * from mybatis.user where id = #{id};
+    </select>
+
+    <select id="getUserById2" resultType="com.strawberry.pojo.User" parameterType="map">
+        select * from mybatis.user where id = #{helloId} and name = #{name};
+    </select>
+
+    <insert id="addUser" parameterType="com.strawberry.pojo.User">
+        insert into mybatis.user (id, name, pwd) values (#{id}, #{name}, #{pwd});
+    </insert>
+
+    <update id="updateUser" parameterType="com.strawberry.pojo.User">
+        update mybatis.user set name = #{name}, pwd = #{pwd} where id = #{id};
+    </update>
+
+    <select id="getUserLike" resultType="com.strawberry.pojo.User" parameterType="java.lang.String">
+        select * from mybatis.user where name like #{name};
+    </select>
+</mapper>
